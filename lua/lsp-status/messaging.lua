@@ -63,7 +63,8 @@ local function get_messages()
           message = ctx.message,
           percentage = ctx.percentage,
           progress = true,
-          spinner = ctx.spinner
+          spinner = ctx.spinner,
+          client_id = client
         })
 
         if ctx.done then table.insert(progress_remove, {client = client, token = token}) end
@@ -75,7 +76,7 @@ local function get_messages()
           if msg.shown > 1 then table.insert(msg_remove, {client = client, idx = i}) end
         end
 
-        table.insert(new_messages, {name = data.name, content = msg.content})
+        table.insert(new_messages, {name = data.name, content = msg.content, client_id = client })
       end
 
       if next(data.status) ~= nil then
@@ -83,7 +84,8 @@ local function get_messages()
           name = data.name,
           content = data.status.content,
           uri = data.status.uri,
-          status = true
+          status = true,
+          client_id = client
         })
       end
     end
